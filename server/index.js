@@ -66,7 +66,7 @@ app.post('/user', async(req, res) => {
             user: req.body.user,
             password: req.body.password
          }
-         res.status(201).json({...userData, token});
+         res.status(200).json({...userData, token});
       }else {
          check.name = req.body.name;
          await check.save();
@@ -90,6 +90,7 @@ app.post('/user', async(req, res) => {
       }
    }catch(err) {
       console.log('Error', err)
+      res.status(500).json({ error: 'server_error',error_message: errs, message: 'حدث خطأ غير متوقع' });
    }
 });
 
