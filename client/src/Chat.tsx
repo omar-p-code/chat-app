@@ -176,7 +176,7 @@ window.onbeforeunload = (e) => {
       <div className="chat-container">
          <div ref={alert} className="alerts">
             {alerts.map((alert, index) => (
-               <div key={index} className="alert">
+               <div key={index} className="alert" translate='no'>
                   {alert}
                </div>
             ))}
