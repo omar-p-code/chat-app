@@ -13,7 +13,7 @@ dotenv.config();
 const logedinUsers = []; // Set to keep track of logged-in users
 // You can use this set to manage logged-in users, e.g., for broadcasting messages or notifications
 
-const allowedOrigins = ['http://localhost:3000', 'https://wholly-leading-parrot.ngrok-free.app', "https://yama-client.loca.lt"]
+const allowedOrigins = ['http://localhost:3000', 'https://wholly-leading-parrot.ngrok-free.app', "https://yama-client.loca.lt", "https://chat-app-eight-tau-86.vercel.app/"]
 
 const app = express();
 
