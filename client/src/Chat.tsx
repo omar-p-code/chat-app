@@ -70,7 +70,7 @@ export default function Chat(props: Props): React.ReactElement{
       socket.off('user-join'); // Remove any previous listeners to avoid duplicates
       socket.on('user-joined', (data: { user: string }) => {
          console.log(`${data.user} has joined the chat.`);
-         setAlerts(prevAlerts => [...prevAlerts, `${data.user} has joined the chat.`]);
+         setAlerts(prevAlerts => [...prevAlerts, `<span translate='no'>${data.user}/> has joined the chat.`]);
          if (alert.current) {
          alert.current!.className = 'alerts show';
          }
@@ -86,7 +86,7 @@ export default function Chat(props: Props): React.ReactElement{
       socket.off('user-leave'); // Clear previous listeners to avoid duplicates
       socket.on('user-leave', (data: { user: string }) => {
          console.log(`${data.user} has left the chat.`);
-         setAlerts(prevAlerts => [...prevAlerts, `${data.user} has left the chat.`]);
+         setAlerts(prevAlerts => [...prevAlerts, `<span translate='no'>${data.user}/> has left the chat.`]);
          if (alert.current) {
          alert.current!.className = 'alerts show';
          }
@@ -176,7 +176,7 @@ window.onbeforeunload = (e) => {
       <div className="chat-container">
          <div ref={alert} className="alerts">
             {alerts.map((alert, index) => (
-               <div key={index} className="alert" translate='no'>
+               <div key={index} className="alert">
                   {alert}
                </div>
             ))}
