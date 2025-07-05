@@ -102,7 +102,7 @@ app.get('/user',verifyToken , async (req, res) => {
       if (!data) {
          return res.status(200).json({user: false, message: 'User not found'});
       }
-      if (logedinUsers.include(data.user)) {
+      if (logedinUsers.includes(data.user)) {
          logedinUsers.splice(logedinUsers.indexOf(data.user), 1);
       }
       res.status(200).json(data);
