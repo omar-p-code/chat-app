@@ -192,8 +192,8 @@ window.onbeforeunload = (e) => {
 
                </div>
                <div className="user-info">
-                  <div className="name">{userData.name}</div>
-                  <div className="user">{userData.user}</div>
+                  <div className="name" translate='no'>{userData.name}</div>
+                  <div className="user" translate='no'>{userData.user}</div>
                </div>
                   <div className="logout" onClick={handleLogout}>Logout</div>
             </div>
@@ -208,9 +208,9 @@ window.onbeforeunload = (e) => {
                               <path d="M22.0703 75.0391C26.3867 67.5391 34.4922 62.5 43.75 62.5H56.25C65.5078 62.5 73.6133 67.5391 77.9297 75.0391C71.0547 82.6953 61.0938 87.5 50 87.5C38.9062 87.5 28.9453 82.6758 22.0703 75.0391ZM100 50C100 36.7392 94.7322 24.0215 85.3553 14.6447C75.9785 5.26784 63.2608 0 50 0C36.7392 0 24.0215 5.26784 14.6447 14.6447C5.26784 24.0215 0 36.7392 0 50C0 63.2608 5.26784 75.9785 14.6447 85.3553C24.0215 94.7322 36.7392 100 50 100C63.2608 100 75.9785 94.7322 85.3553 85.3553C94.7322 75.9785 100 63.2608 100 50ZM50 53.125C46.2704 53.125 42.6935 51.6434 40.0563 49.0062C37.4191 46.369 35.9375 42.7921 35.9375 39.0625C35.9375 35.3329 37.4191 31.756 40.0563 29.1188C42.6935 26.4816 46.2704 25 50 25C53.7296 25 57.3065 26.4816 59.9437 29.1188C62.5809 31.756 64.0625 35.3329 64.0625 39.0625C64.0625 42.7921 62.5809 46.369 59.9437 49.0062C57.3065 51.6434 53.7296 53.125 50 53.125Z" className='color' fill="black" />
                            </svg>
                         </div>
-                           <div className="user">{message.user}</div>
+                           <div className="user" translate='no'>{message.user}</div>
                      </div>
-                     <div className="text">{message.message}</div>
+                     <div className="text" translate='no'>{message.message}</div>
                   </div>): 'No Messages Yet'
                }
             </div>
