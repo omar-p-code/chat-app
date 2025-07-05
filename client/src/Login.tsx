@@ -3,7 +3,7 @@ import axios from 'axios';
 import { io } from 'socket.io-client';
 
 
-const server = 'http://localhost:8080';
+const server = 'https://chat-app-production-7751.up.railway.app';
 
 const socket = io(server);
 interface UserData {
