@@ -3,10 +3,8 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 
-const JWT_SECRET = process.env.JWT_SECRET; // يفضل في .env
+const JWT_SECRET = process.env.JWT_SECRET;
 
-
-// ميدل وير لحماية الراوتات
 export function verifyToken(req, res, next) {
    const token = req.headers.authorization?.split(" ")[1].replaceAll('"', ''); // Expecting: Bearer <token>
    // console.log(JWT_SECRET)
@@ -18,7 +16,7 @@ export function verifyToken(req, res, next) {
 
    try {
       const decoded = jwt.verify(token, JWT_SECRET);
-      req.user = decoded; // تقدر تستخدم req.user في الراوت بعد كده
+      req.user = decoded;
       next();
    } catch (err) {
       // console.log(err)
