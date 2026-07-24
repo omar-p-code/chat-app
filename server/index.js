@@ -21,21 +21,22 @@ const server = http.createServer(app);
 
 
 mongoose.connect(process.env.MONGO_URL)
-.then(() => console.log('DataBaseConnected'))
-.catch(err => {
-   console.log('Error connecting to MongoDB:', err.message);
-   if (err.code === 11000) {
-   return res.status(409).json({
-      error: 'duplicate',
-      message: 'الاسم مستخدم بالفعل، اختر اسم آخر'
-   });
-}})
+   .then(() => console.log('DataBaseConnected'))
+   .catch(err => {
+      console.log('Error connecting to MongoDB:', err.message);
+      if (err.code === 11000) {
+         return res.status(409).json({
+            error: 'duplicate',
+            message: 'الاسم مستخدم بالفعل، اختر اسم آخر'
+         });
+      }
+   })
 
 const corsOptions = {
    origin: function (origin, callback) {
       if (!origin || allowedOrigins.includes(origin)) {
          callback(null, true)
-      }else {
+      } else {
          callback(new Error('Not Allowed by cors'))
       }
    },
@@ -50,7 +51,7 @@ app.use(cors(corsOptions));
 
 app.use(express.json())
 
-app.post('/user', async(req, res) => {
+app.post('/user', async (req, res) => {
    try {
       const check = await User.findOne({ user: req.body.user })
       const token = JWT.sign(req.body,
@@ -66,8 +67,8 @@ app.post('/user', async(req, res) => {
             user: req.body.user,
             password: req.body.password
          }
-         res.status(200).json({...userData, token});
-      }else {
+         res.status(200).json({ ...userData, token });
+      } else {
          check.name = req.body.name;
          await check.save();
          if (logedinUsers.includes(check.user)) {
@@ -86,27 +87,27 @@ app.post('/user', async(req, res) => {
             user: check.user,
             password: check.password
          }
-         res.status(201).json({...userData, token})
+         res.status(201).json({ ...userData, token })
       }
-   }catch(err) {
+   } catch (err) {
       console.log('Error', err)
-      res.status(500).json({ error: 'server_error',error_message: errs, message: 'حدث خطأ غير متوقع' });
+      res.status(500).json({ error: 'server_error', error_message: errs, message: 'حدث خطأ غير متوقع' });
    }
 });
 
-app.get('/user',verifyToken , async (req, res) => {
+app.get('/user', verifyToken, async (req, res) => {
    // console.log(req.user, req.headers.authorization)
    try {
       const data = await User.findOne({ user: req.user.user });
       console.log("req", req.user)
       if (!data) {
-         return res.status(200).json({user: false, message: 'User not found'});
+         return res.status(200).json({ user: false, message: 'User not found' });
       }
       if (logedinUsers.includes(data.user)) {
          logedinUsers.splice(logedinUsers.indexOf(data.user), 1);
       }
       res.status(200).json(data);
-   }catch (err) {
+   } catch (err) {
       console.log("req", req.user);
       console.log(err)
       res.status(500).json({ error: err.message });
@@ -119,7 +120,7 @@ app.get('/chat', verifyToken, async (req, res) => {
       // console.log(chats)
       console.log('users', logedinUsers);
       res.status(200).json(chats);
-   }catch (err) {
+   } catch (err) {
       console.log(err);
       res.status(500).json({ error: err.message });
    }
@@ -147,10 +148,11 @@ io.on('connection', (socket) => {
    });
 
    socket.on('chat', (data) => {
-      io.emit('chat', data); });
+      io.emit('chat', data);
+   });
 
    socket.on('error', (err) => {
-      console.error('Socket error:', err); 
+      console.error('Socket error:', err);
    });
 
    socket.on('typing', (data) => {
@@ -172,7 +174,7 @@ app.post('/chat', verifyToken, async (req, res) => {
       });
 
       res.status(201).json(chat);
-   }catch (err) {
+   } catch (err) {
       console.log(err);
       res.status(500).json({ error: err.message });
    }
@@ -191,6 +193,8 @@ app.post('/logout', verifyToken, (req, res) => {
    }
 });
 
-server.listen('8080', () => {
-   console.log('port 8080')
-})
+// server.listen('8080', () => {
+//    console.log('port 8080')
+// })
+
+export default app

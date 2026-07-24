@@ -1,4 +1,4 @@
-import { useState } from 'react';  
+import { useState } from 'react';
 import Login from './Login';
 import Chat from './Chat';
 
@@ -9,8 +9,8 @@ function App() {
     user: string;
     password: string;
   }
-  const [ state, setState ] = useState<State>('login')
-  const [ userData, setUserData ] = useState<UserData>({
+  const [state, setState] = useState<State>('login')
+  const [userData, setUserData] = useState<UserData>({
     name: '',
     user: '',
     password: ''
@@ -18,11 +18,11 @@ function App() {
 
   return (
     <>
-    <div className={`app ${state}`}>
+      <div className={`app ${state}`}>
         {state === 'login' ? (<Login vars={{ state, setState, userData, setUserData }} />)
           : (<Chat vars={{ state, setState, userData, setUserData }} />)
         }
-    </div>
+      </div>
     </>
   )
 }
